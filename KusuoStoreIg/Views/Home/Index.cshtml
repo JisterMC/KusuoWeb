@@ -11,14 +11,33 @@
 
 <div class="row">
     <div class="col-md-4">
-        <img src="~/Content/Image/separacupo.png" width="100%" height="100%"/>
+        <img src="~/Content/Image/separacupo.png" width="100%" height="100%" />
         <p>
             ¡Para adquirir tu carcasa personalizada deberás esperar que haya cupos disponibles! Para recibir una notificación cuando haya cupos abiertos da click en el boton inferior.
         </p>
-        <p><i class="fa fa-home"></i><a class="btn btn-danger" href="https://go.microsoft.com/fwlink/?LinkId=301865">Recibe una notificación <i class="bi bi-bell"></i></a></p>
+        <!-- Trigger the modal with a button -->
+        <i class="fa fa-home"></i><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Recibe una notificación<i class="bi bi-bell"></i></button>
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">¡Gracias por confiar en nosotros!</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>¡Ahora recibirás una notificación cuando tengamos cupos abiertos!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="col-md-4">
-        <img src="~/Content/Image/kusuo3.png" width="100%" height="100%"/>
+        <img src="~/Content/Image/kusuo3.png" width="100%" height="100%" />
         <p>Cuando haya cupos disponibles el botón inferior estará activo para realizar una cotización según el modelo de tu teléfono y los colores disponibles, recuerda que puedes elegir cualquier personaje pero debe ser arte oficial</p>
         <p>
             <a class="btn btn-danger" disabled href="https://go.microsoft.com/fwlink/?LinkId=301866">
@@ -37,4 +56,7 @@
         <p>¡Déjanos una valoración si ya recibiste tu carcasa!</p>
         <p><a class="btn btn-danger" href="https://go.microsoft.com/fwlink/?LinkId=301867">Valóranos <i class="bi bi-star"></i> </a>  </p>
     </div>
+
+
+
 </div>

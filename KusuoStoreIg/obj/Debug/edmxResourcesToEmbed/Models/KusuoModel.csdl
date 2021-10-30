@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KusuoStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="carcasa">
+    <Key>
+      <PropertyRef Name="IDcar" />
+    </Key>
+    <Property Name="IDcar" Type="Int32" Nullable="false" />
+    <Property Name="marca" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="colorb" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="orientacion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nompersonaje" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="pedido" Relationship="Self.FK__pedido__IDcar__2E1BDC42" FromRole="carcasa" ToRole="pedido" />
+  </EntityType>
+  <EntityType Name="pedido">
+    <Key>
+      <PropertyRef Name="IDpedido" />
+    </Key>
+    <Property Name="IDpedido" Type="Int32" Nullable="false" />
+    <Property Name="IDus" Type="Int32" Nullable="false" />
+    <Property Name="IDcar" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="carcasa" Relationship="Self.FK__pedido__IDcar__2E1BDC42" FromRole="pedido" ToRole="carcasa" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK__pedido__IDus__2D27B809" FromRole="pedido" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="region">
+    <Key>
+      <PropertyRef Name="idR" />
+    </Key>
+    <Property Name="idR" Type="Int32" Nullable="false" />
+    <Property Name="nomR" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="comuna" Relationship="Self.FK__comuna__idR__267ABA7A" FromRole="region" ToRole="comuna" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="IDus" />
+    </Key>
+    <Property Name="IDus" Type="Int32" Nullable="false" />
+    <Property Name="nomusuario" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="contraseña" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="tipousuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="pedido" Relationship="Self.FK__pedido__IDus__2D27B809" FromRole="usuario" ToRole="pedido" />
+    <NavigationProperty Name="persona" Relationship="Self.FK__persona__IDus__286302EC" FromRole="usuario" ToRole="persona" />
+  </EntityType>
+  <EntityType Name="comuna">
+    <Key>
+      <PropertyRef Name="nomC" />
+      <PropertyRef Name="idR" />
+    </Key>
+    <Property Name="nomC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="idR" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="region" Relationship="Self.FK__comuna__idR__267ABA7A" FromRole="comuna" ToRole="region" />
+  </EntityType>
+  <EntityType Name="persona">
+    <Key>
+      <PropertyRef Name="nombrec" />
+      <PropertyRef Name="apellido" />
+      <PropertyRef Name="direccion" />
+      <PropertyRef Name="comuna" />
+      <PropertyRef Name="region" />
+      <PropertyRef Name="nrotlf" />
+      <PropertyRef Name="rut" />
+    </Key>
+    <Property Name="nombrec" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="apellido" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="comuna" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="region" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nrotlf" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="rut" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IDus" Type="Int32" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK__persona__IDus__286302EC" FromRole="persona" ToRole="usuario" />
+  </EntityType>
+  <Association Name="FK__pedido__IDcar__2E1BDC42">
+    <End Role="carcasa" Type="Self.carcasa" Multiplicity="1" />
+    <End Role="pedido" Type="Self.pedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="carcasa">
+        <PropertyRef Name="IDcar" />
+      </Principal>
+      <Dependent Role="pedido">
+        <PropertyRef Name="IDcar" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__pedido__IDus__2D27B809">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="pedido" Type="Self.pedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="IDus" />
+      </Principal>
+      <Dependent Role="pedido">
+        <PropertyRef Name="IDus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__comuna__idR__267ABA7A">
+    <End Role="region" Type="Self.region" Multiplicity="1" />
+    <End Role="comuna" Type="Self.comuna" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="region">
+        <PropertyRef Name="idR" />
+      </Principal>
+      <Dependent Role="comuna">
+        <PropertyRef Name="idR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__persona__IDus__286302EC">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+    <End Role="persona" Type="Self.persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="IDus" />
+      </Principal>
+      <Dependent Role="persona">
+        <PropertyRef Name="IDus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="KusuoStoreEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="carcasa" EntityType="Self.carcasa" />
+    <EntitySet Name="pedido" EntityType="Self.pedido" />
+    <EntitySet Name="region" EntityType="Self.region" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" />
+    <EntitySet Name="comuna" EntityType="Self.comuna" />
+    <EntitySet Name="persona" EntityType="Self.persona" />
+    <AssociationSet Name="FK__pedido__IDcar__2E1BDC42" Association="Self.FK__pedido__IDcar__2E1BDC42">
+      <End Role="carcasa" EntitySet="carcasa" />
+      <End Role="pedido" EntitySet="pedido" />
+    </AssociationSet>
+    <AssociationSet Name="FK__pedido__IDus__2D27B809" Association="Self.FK__pedido__IDus__2D27B809">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="pedido" EntitySet="pedido" />
+    </AssociationSet>
+    <AssociationSet Name="FK__comuna__idR__267ABA7A" Association="Self.FK__comuna__idR__267ABA7A">
+      <End Role="region" EntitySet="region" />
+      <End Role="comuna" EntitySet="comuna" />
+    </AssociationSet>
+    <AssociationSet Name="FK__persona__IDus__286302EC" Association="Self.FK__persona__IDus__286302EC">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="persona" EntitySet="persona" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

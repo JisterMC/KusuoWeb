@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="KusuoStoreModelStoreContainer" CdmEntityContainer="KusuoStoreEntities1">
+    <EntitySetMapping Name="carcasa">
+      <EntityTypeMapping TypeName="KusuoStoreModel.carcasa">
+        <MappingFragment StoreEntitySet="carcasa">
+          <ScalarProperty Name="IDcar" ColumnName="IDcar" />
+          <ScalarProperty Name="marca" ColumnName="marca" />
+          <ScalarProperty Name="modelo" ColumnName="modelo" />
+          <ScalarProperty Name="colorb" ColumnName="colorb" />
+          <ScalarProperty Name="orientacion" ColumnName="orientacion" />
+          <ScalarProperty Name="nompersonaje" ColumnName="nompersonaje" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pedido">
+      <EntityTypeMapping TypeName="KusuoStoreModel.pedido">
+        <MappingFragment StoreEntitySet="pedido">
+          <ScalarProperty Name="IDpedido" ColumnName="IDpedido" />
+          <ScalarProperty Name="IDus" ColumnName="IDus" />
+          <ScalarProperty Name="IDcar" ColumnName="IDcar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="region">
+      <EntityTypeMapping TypeName="KusuoStoreModel.region">
+        <MappingFragment StoreEntitySet="region">
+          <ScalarProperty Name="idR" ColumnName="idR" />
+          <ScalarProperty Name="nomR" ColumnName="nomR" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuario">
+      <EntityTypeMapping TypeName="KusuoStoreModel.usuario">
+        <MappingFragment StoreEntitySet="usuario">
+          <ScalarProperty Name="IDus" ColumnName="IDus" />
+          <ScalarProperty Name="nomusuario" ColumnName="nomusuario" />
+          <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+          <ScalarProperty Name="tipousuario" ColumnName="tipousuario" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="comuna">
+      <EntityTypeMapping TypeName="KusuoStoreModel.comuna">
+        <MappingFragment StoreEntitySet="comuna">
+          <ScalarProperty Name="nomC" ColumnName="nomC" />
+          <ScalarProperty Name="idR" ColumnName="idR" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="persona">
+      <EntityTypeMapping TypeName="KusuoStoreModel.persona">
+        <MappingFragment StoreEntitySet="persona">
+          <ScalarProperty Name="nombrec" ColumnName="nombrec" />
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="comuna" ColumnName="comuna" />
+          <ScalarProperty Name="region" ColumnName="region" />
+          <ScalarProperty Name="nrotlf" ColumnName="nrotlf" />
+          <ScalarProperty Name="rut" ColumnName="rut" />
+          <ScalarProperty Name="IDus" ColumnName="IDus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

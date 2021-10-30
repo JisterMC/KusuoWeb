@@ -24,7 +24,20 @@
                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
                     <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
                     <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Acceder", "Login", "Home") </li>
+                    <li>@Html.ActionLink("Modelos", "Modelos", "Home")</li>
+                </ul>
+                <ul class="nav navbar-nav" style="float:right !important">
+                    @if (Session["UsernameSS"] != null)
+                    {
+                        <li><p class="alert-success">Hello @Session["UsernameSS"]</p></li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Registro", "Registro", "Home")</li>
+                        <li>@Html.ActionLink("Login", "Login", "Home")</li>
+                    }
+
                 </ul>
             </div>
         </div>

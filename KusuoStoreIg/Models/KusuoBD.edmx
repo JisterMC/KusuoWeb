@@ -1,0 +1,401 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KusuoStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="carcasa">
+          <Key>
+            <PropertyRef Name="IDcar" />
+          </Key>
+          <Property Name="IDcar" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="marca" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="modelo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="colorb" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="orientacion" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="nompersonaje" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'KusuoStore.dbo.comuna' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="comuna">
+          <Key>
+            <PropertyRef Name="nomC" />
+            <PropertyRef Name="idR" />
+          </Key>
+          <Property Name="nomC" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="idR" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pedido">
+          <Key>
+            <PropertyRef Name="IDpedido" />
+          </Key>
+          <Property Name="IDpedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDus" Type="int" Nullable="false" />
+          <Property Name="IDcar" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'KusuoStore.dbo.persona' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="persona">
+          <Key>
+            <PropertyRef Name="nombrec" />
+            <PropertyRef Name="apellido" />
+            <PropertyRef Name="direccion" />
+            <PropertyRef Name="comuna" />
+            <PropertyRef Name="region" />
+            <PropertyRef Name="nrotlf" />
+            <PropertyRef Name="rut" />
+          </Key>
+          <Property Name="nombrec" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="apellido" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="direccion" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="comuna" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="region" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="nrotlf" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="rut" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="IDus" Type="int" />
+        </EntityType>
+        <EntityType Name="region">
+          <Key>
+            <PropertyRef Name="idR" />
+          </Key>
+          <Property Name="idR" Type="int" Nullable="false" />
+          <Property Name="nomR" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="IDus" />
+          </Key>
+          <Property Name="IDus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nomusuario" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="contraseña" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+          <Property Name="tipousuario" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK__comuna__idR__276EDEB3">
+          <End Role="region" Type="Self.region" Multiplicity="1" />
+          <End Role="comuna" Type="Self.comuna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="region">
+              <PropertyRef Name="idR" />
+            </Principal>
+            <Dependent Role="comuna">
+              <PropertyRef Name="idR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pedido__IDcar__2F10007B">
+          <End Role="carcasa" Type="Self.carcasa" Multiplicity="1" />
+          <End Role="pedido" Type="Self.pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="carcasa">
+              <PropertyRef Name="IDcar" />
+            </Principal>
+            <Dependent Role="pedido">
+              <PropertyRef Name="IDcar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pedido__IDus__2E1BDC42">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="pedido" Type="Self.pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="IDus" />
+            </Principal>
+            <Dependent Role="pedido">
+              <PropertyRef Name="IDus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__persona__IDus__29572725">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="persona" Type="Self.persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="IDus" />
+            </Principal>
+            <Dependent Role="persona">
+              <PropertyRef Name="IDus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KusuoStoreModelStoreContainer">
+          <EntitySet Name="carcasa" EntityType="Self.carcasa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pedido" EntityType="Self.pedido" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="region" EntityType="Self.region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="comuna" EntityType="Self.comuna" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [comuna].[nomC] AS [nomC], 
+    [comuna].[idR] AS [idR]
+    FROM [dbo].[comuna] AS [comuna]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="persona" EntityType="Self.persona" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [persona].[nombrec] AS [nombrec], 
+    [persona].[apellido] AS [apellido], 
+    [persona].[direccion] AS [direccion], 
+    [persona].[comuna] AS [comuna], 
+    [persona].[region] AS [region], 
+    [persona].[nrotlf] AS [nrotlf], 
+    [persona].[rut] AS [rut], 
+    [persona].[IDus] AS [IDus]
+    FROM [dbo].[persona] AS [persona]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__comuna__idR__276EDEB3" Association="Self.FK__comuna__idR__276EDEB3">
+            <End Role="region" EntitySet="region" />
+            <End Role="comuna" EntitySet="comuna" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pedido__IDcar__2F10007B" Association="Self.FK__pedido__IDcar__2F10007B">
+            <End Role="carcasa" EntitySet="carcasa" />
+            <End Role="pedido" EntitySet="pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pedido__IDus__2E1BDC42" Association="Self.FK__pedido__IDus__2E1BDC42">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="pedido" EntitySet="pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK__persona__IDus__29572725" Association="Self.FK__persona__IDus__29572725">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="persona" EntitySet="persona" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KusuoStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="carcasa">
+          <Key>
+            <PropertyRef Name="IDcar" />
+          </Key>
+          <Property Name="IDcar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="marca" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="colorb" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="orientacion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nompersonaje" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="pedido" Relationship="Self.FK__pedido__IDcar__2F10007B" FromRole="carcasa" ToRole="pedido" />
+        </EntityType>
+        <EntityType Name="pedido">
+          <Key>
+            <PropertyRef Name="IDpedido" />
+          </Key>
+          <Property Name="IDpedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDus" Type="Int32" Nullable="false" />
+          <Property Name="IDcar" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="carcasa" Relationship="Self.FK__pedido__IDcar__2F10007B" FromRole="pedido" ToRole="carcasa" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK__pedido__IDus__2E1BDC42" FromRole="pedido" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="region">
+          <Key>
+            <PropertyRef Name="idR" />
+          </Key>
+          <Property Name="idR" Type="Int32" Nullable="false" />
+          <Property Name="nomR" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="comuna" Relationship="Self.FK__comuna__idR__276EDEB3" FromRole="region" ToRole="comuna" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="IDus" />
+          </Key>
+          <Property Name="IDus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nomusuario" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contraseña" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipousuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="pedido" Relationship="Self.FK__pedido__IDus__2E1BDC42" FromRole="usuario" ToRole="pedido" />
+          <NavigationProperty Name="persona" Relationship="Self.FK__persona__IDus__29572725" FromRole="usuario" ToRole="persona" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="comuna">
+          <Key>
+            <PropertyRef Name="nomC" />
+            <PropertyRef Name="idR" />
+          </Key>
+          <Property Name="nomC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idR" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="region" Relationship="Self.FK__comuna__idR__276EDEB3" FromRole="comuna" ToRole="region" />
+        </EntityType>
+        <EntityType Name="persona">
+          <Key>
+            <PropertyRef Name="nombrec" />
+            <PropertyRef Name="apellido" />
+            <PropertyRef Name="direccion" />
+            <PropertyRef Name="comuna" />
+            <PropertyRef Name="region" />
+            <PropertyRef Name="nrotlf" />
+            <PropertyRef Name="rut" />
+          </Key>
+          <Property Name="nombrec" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="comuna" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="region" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nrotlf" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rut" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDus" Type="Int32" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK__persona__IDus__29572725" FromRole="persona" ToRole="usuario" />
+        </EntityType>
+        <Association Name="FK__pedido__IDcar__2F10007B">
+          <End Role="carcasa" Type="Self.carcasa" Multiplicity="1" />
+          <End Role="pedido" Type="Self.pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="carcasa">
+              <PropertyRef Name="IDcar" />
+            </Principal>
+            <Dependent Role="pedido">
+              <PropertyRef Name="IDcar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pedido__IDus__2E1BDC42">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="pedido" Type="Self.pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="IDus" />
+            </Principal>
+            <Dependent Role="pedido">
+              <PropertyRef Name="IDus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__comuna__idR__276EDEB3">
+          <End Role="region" Type="Self.region" Multiplicity="1" />
+          <End Role="comuna" Type="Self.comuna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="region">
+              <PropertyRef Name="idR" />
+            </Principal>
+            <Dependent Role="comuna">
+              <PropertyRef Name="idR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__persona__IDus__29572725">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="persona" Type="Self.persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="IDus" />
+            </Principal>
+            <Dependent Role="persona">
+              <PropertyRef Name="IDus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KusuoEntity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="carcasa" EntityType="Self.carcasa" />
+          <EntitySet Name="pedido" EntityType="Self.pedido" />
+          <EntitySet Name="region" EntityType="Self.region" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" />
+          <EntitySet Name="comuna" EntityType="Self.comuna" />
+          <EntitySet Name="persona" EntityType="Self.persona" />
+          <AssociationSet Name="FK__pedido__IDcar__2F10007B" Association="Self.FK__pedido__IDcar__2F10007B">
+            <End Role="carcasa" EntitySet="carcasa" />
+            <End Role="pedido" EntitySet="pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pedido__IDus__2E1BDC42" Association="Self.FK__pedido__IDus__2E1BDC42">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="pedido" EntitySet="pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK__comuna__idR__276EDEB3" Association="Self.FK__comuna__idR__276EDEB3">
+            <End Role="region" EntitySet="region" />
+            <End Role="comuna" EntitySet="comuna" />
+          </AssociationSet>
+          <AssociationSet Name="FK__persona__IDus__29572725" Association="Self.FK__persona__IDus__29572725">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="persona" EntitySet="persona" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KusuoStoreModelStoreContainer" CdmEntityContainer="KusuoEntity">
+          <EntitySetMapping Name="carcasa">
+            <EntityTypeMapping TypeName="KusuoStoreModel.carcasa">
+              <MappingFragment StoreEntitySet="carcasa">
+                <ScalarProperty Name="IDcar" ColumnName="IDcar" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="colorb" ColumnName="colorb" />
+                <ScalarProperty Name="orientacion" ColumnName="orientacion" />
+                <ScalarProperty Name="nompersonaje" ColumnName="nompersonaje" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pedido">
+            <EntityTypeMapping TypeName="KusuoStoreModel.pedido">
+              <MappingFragment StoreEntitySet="pedido">
+                <ScalarProperty Name="IDpedido" ColumnName="IDpedido" />
+                <ScalarProperty Name="IDus" ColumnName="IDus" />
+                <ScalarProperty Name="IDcar" ColumnName="IDcar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="region">
+            <EntityTypeMapping TypeName="KusuoStoreModel.region">
+              <MappingFragment StoreEntitySet="region">
+                <ScalarProperty Name="idR" ColumnName="idR" />
+                <ScalarProperty Name="nomR" ColumnName="nomR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario">
+            <EntityTypeMapping TypeName="KusuoStoreModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="IDus" ColumnName="IDus" />
+                <ScalarProperty Name="nomusuario" ColumnName="nomusuario" />
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+                <ScalarProperty Name="tipousuario" ColumnName="tipousuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comuna">
+            <EntityTypeMapping TypeName="KusuoStoreModel.comuna">
+              <MappingFragment StoreEntitySet="comuna">
+                <ScalarProperty Name="nomC" ColumnName="nomC" />
+                <ScalarProperty Name="idR" ColumnName="idR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="persona">
+            <EntityTypeMapping TypeName="KusuoStoreModel.persona">
+              <MappingFragment StoreEntitySet="persona">
+                <ScalarProperty Name="nombrec" ColumnName="nombrec" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="comuna" ColumnName="comuna" />
+                <ScalarProperty Name="region" ColumnName="region" />
+                <ScalarProperty Name="nrotlf" ColumnName="nrotlf" />
+                <ScalarProperty Name="rut" ColumnName="rut" />
+                <ScalarProperty Name="IDus" ColumnName="IDus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -84,3 +84,7 @@ C:\Users\Jister\source\repos\KusuoStoreIg\KusuoStoreIg\obj\Debug\KusuoStoreIg.cs
 C:\Users\Jister\source\repos\KusuoStoreIg\KusuoStoreIg\obj\Debug\KusuoStoreIg.csproj.CopyComplete
 C:\Users\Jister\source\repos\KusuoStoreIg\KusuoStoreIg\obj\Debug\KusuoStoreIg.dll
 C:\Users\Jister\source\repos\KusuoStoreIg\KusuoStoreIg\obj\Debug\KusuoStoreIg.pdb
+C:\Users\Jister\source\repos\KusuoStoreIg\KusuoStoreIg\bin\EntityFramework.dll
+C:\Users\Jister\source\repos\KusuoStoreIg\KusuoStoreIg\bin\EntityFramework.SqlServer.dll
+C:\Users\Jister\source\repos\KusuoStoreIg\KusuoStoreIg\bin\EntityFramework.xml
+C:\Users\Jister\source\repos\KusuoStoreIg\KusuoStoreIg\bin\EntityFramework.SqlServer.xml
