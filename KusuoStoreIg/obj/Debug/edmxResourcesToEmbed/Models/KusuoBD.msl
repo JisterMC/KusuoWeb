@@ -1,15 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="KusuoStoreModelStoreContainer" CdmEntityContainer="KusuoEntity">
+  <EntityContainerMapping StorageEntityContainer="KusuoStoreModelStoreContainer" CdmEntityContainer="KusuoStoreEn">
     <EntitySetMapping Name="carcasa">
       <EntityTypeMapping TypeName="KusuoStoreModel.carcasa">
         <MappingFragment StoreEntitySet="carcasa">
+          <ScalarProperty Name="urlimg" ColumnName="urlimg" />
           <ScalarProperty Name="IDcar" ColumnName="IDcar" />
           <ScalarProperty Name="marca" ColumnName="marca" />
           <ScalarProperty Name="modelo" ColumnName="modelo" />
           <ScalarProperty Name="colorb" ColumnName="colorb" />
           <ScalarProperty Name="orientacion" ColumnName="orientacion" />
           <ScalarProperty Name="nompersonaje" ColumnName="nompersonaje" />
+          <ScalarProperty Name="precio" ColumnName="precio" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -19,6 +21,8 @@
           <ScalarProperty Name="IDpedido" ColumnName="IDpedido" />
           <ScalarProperty Name="IDus" ColumnName="IDus" />
           <ScalarProperty Name="IDcar" ColumnName="IDcar" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="preciot" ColumnName="preciot" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -33,8 +37,8 @@
     <EntitySetMapping Name="usuario">
       <EntityTypeMapping TypeName="KusuoStoreModel.usuario">
         <MappingFragment StoreEntitySet="usuario">
-          <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="IDus" ColumnName="IDus" />
+          <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="nomusuario" ColumnName="nomusuario" />
           <ScalarProperty Name="contraseña" ColumnName="contraseña" />
           <ScalarProperty Name="tipousuario" ColumnName="tipousuario" />

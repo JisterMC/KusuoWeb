@@ -10,6 +10,8 @@
     <Property Name="colorb" Type="varchar" MaxLength="40" Nullable="false" />
     <Property Name="orientacion" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="nompersonaje" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="precio" Type="float" Nullable="false" />
+    <Property Name="urlimg" Type="varchar" MaxLength="500" Nullable="false" />
   </EntityType>
   <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'KusuoStore.dbo.comuna' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -28,6 +30,8 @@ advertencia 6002: La tabla o vista 'KusuoStore.dbo.comuna' no tiene definida nin
     <Property Name="IDpedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IDus" Type="int" Nullable="false" />
     <Property Name="IDcar" Type="int" Nullable="false" />
+    <Property Name="cantidad" Type="int" Nullable="false" />
+    <Property Name="preciot" Type="float" Nullable="false" />
   </EntityType>
   <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'KusuoStore.dbo.persona' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -62,10 +66,10 @@ advertencia 6002: La tabla o vista 'KusuoStore.dbo.persona' no tiene definida ni
       <PropertyRef Name="IDus" />
     </Key>
     <Property Name="IDus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="nomusuario" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="contraseña" Type="varchar" MaxLength="30" Nullable="false" />
-    <Property Name="email" Type="varchar" MaxLength="100" />
-    <Property Name="tipousuario" Type="varchar" MaxLength="100" />
+    <Property Name="tipousuario" Type="varchar" MaxLength="255" />
   </EntityType>
   <Association Name="FK__comuna__idR__276EDEB3">
     <End Role="region" Type="Self.region" Multiplicity="1" />

@@ -1,15 +1,14 @@
 ﻿using KusuoStoreIg.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace KusuoStoreIg.Controllers
 {
     public class HomeController : Controller
     {
-        KusuoEntity db = new KusuoEntity();
+        KusuoStoreEn db = new KusuoStoreEn();
+        //USUARIO
         // GET: Usuario
         public ActionResult Registro()
         {
@@ -33,7 +32,7 @@ namespace KusuoStoreIg.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-    
+   
     public ActionResult Index()
         {
             return View();
@@ -79,11 +78,23 @@ namespace KusuoStoreIg.Controllers
             }
             return View();
         }
+        //CARCASAS
         public ActionResult Modelos()
         {
+            List<carcasa> listdata = db.carcasa.ToList();
+
             ViewBag.Message = "¡Contáctanos!";
 
-            return View();
+            return View(listdata);
+        }
+
+        [HttpPost]
+        public ActionResult Agregarcarcasa(carcasa carcasa)
+        {
+            db.carcasa.Add(carcasa);
+            db.SaveChanges();
+          return View();
+
         }
 
     }

@@ -17,6 +17,8 @@ namespace KusuoStoreIg.Models
         public int IDpedido { get; set; }
         public int IDus { get; set; }
         public int IDcar { get; set; }
+        public int cantidad { get; set; }
+        public double preciot { get; set; }
     
         public virtual carcasa carcasa { get; set; }
         public virtual usuario usuario { get; set; }

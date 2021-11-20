@@ -10,7 +10,9 @@
     <Property Name="colorb" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="orientacion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="nompersonaje" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="precio" Type="Double" Nullable="false" />
     <NavigationProperty Name="pedido" Relationship="Self.FK__pedido__IDcar__2F10007B" FromRole="carcasa" ToRole="pedido" />
+    <Property Name="urlimg" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="pedido">
     <Key>
@@ -19,6 +21,8 @@
     <Property Name="IDpedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IDus" Type="Int32" Nullable="false" />
     <Property Name="IDcar" Type="Int32" Nullable="false" />
+    <Property Name="cantidad" Type="Int32" Nullable="false" />
+    <Property Name="preciot" Type="Double" Nullable="false" />
     <NavigationProperty Name="carcasa" Relationship="Self.FK__pedido__IDcar__2F10007B" FromRole="pedido" ToRole="carcasa" />
     <NavigationProperty Name="usuario" Relationship="Self.FK__pedido__IDus__2E1BDC42" FromRole="pedido" ToRole="usuario" />
   </EntityType>
@@ -35,12 +39,12 @@
       <PropertyRef Name="IDus" />
     </Key>
     <Property Name="IDus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="nomusuario" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="contraseña" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="tipousuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="tipousuario" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="pedido" Relationship="Self.FK__pedido__IDus__2E1BDC42" FromRole="usuario" ToRole="pedido" />
     <NavigationProperty Name="persona" Relationship="Self.FK__persona__IDus__29572725" FromRole="usuario" ToRole="persona" />
-    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="comuna">
     <Key>
@@ -119,7 +123,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="KusuoEntity" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="KusuoStoreEn" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="carcasa" EntityType="Self.carcasa" />
     <EntitySet Name="pedido" EntityType="Self.pedido" />
     <EntitySet Name="region" EntityType="Self.region" />

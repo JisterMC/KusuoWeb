@@ -26,6 +26,8 @@ namespace KusuoStoreIg.Models
         public string colorb { get; set; }
         public string orientacion { get; set; }
         public string nompersonaje { get; set; }
+        public double precio { get; set; }
+        public string urlimg { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pedido> pedido { get; set; }

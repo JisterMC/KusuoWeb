@@ -13,10 +13,10 @@ namespace KusuoStoreIg.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class KusuoEntity : DbContext
+    public partial class KusuoStoreEn : DbContext
     {
-        public KusuoEntity()
-            : base("name=KusuoEntity")
+        public KusuoStoreEn()
+            : base("name=KusuoStoreEn")
         {
         }
     

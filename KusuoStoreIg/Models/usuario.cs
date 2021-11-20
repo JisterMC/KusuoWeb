@@ -21,7 +21,7 @@ namespace KusuoStoreIg.Models
             this.pedido = new HashSet<pedido>();
             this.persona = new HashSet<persona>();
         }
-    
+
         public int IDus { get; set; }
         [Required(ErrorMessage = "Se requiere este campo lleno")]
         [Display(Name = "Nombre de usuario")]
@@ -36,10 +36,10 @@ namespace KusuoStoreIg.Models
         public string recontraseña { get; set; }
         public string tipousuario { get; set; }
         [Display(Name = "Email")]
-        [Required(ErrorMessage = "Se requiere este campo lleno")]       
+        [Required(ErrorMessage = "Se requiere este campo lleno")]
         [DataType(DataType.EmailAddress)]
         public string email { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pedido> pedido { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
